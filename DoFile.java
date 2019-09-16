@@ -17,6 +17,7 @@ public class DoFile {
 	public static void saveFile(List<User> list) throws IOException {
 		
 		File file = new File(path);
+		@SuppressWarnings("resource")
 		FileWriter fw =  new FileWriter(file);
 		for(User a : list) {
 				fw.write("{");
@@ -29,7 +30,7 @@ public class DoFile {
 	}
 
 	public static List<String> readFile() throws IOException {
-		File f = new File(dataPath);
+		
 		FileReader fr = new FileReader(dataPath) ;
 		BufferedReader br = new BufferedReader(fr) ; 
 		List<String> data = new ArrayList<>();
@@ -44,12 +45,6 @@ public class DoFile {
 	}
 	
 	public static List<String> readFile(String filepath) throws IOException {
-		File file = null;
-		if(filepath != null) {
-			file = new File(filepath);
-		}else {
-			file = new File(dataPath);
-		}
 		
 		List<String> data = new ArrayList<>();
 		FileReader fr = new FileReader(dataPath) ;

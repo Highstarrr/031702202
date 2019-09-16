@@ -59,10 +59,12 @@ public class User {
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public void setAl() {
 		String regex="(?<province>[^省]+自治区|.*?省|.*?行政区)?(?<city>[^市]+自治州|.*?地区|.*?行政单位|.+盟|市辖区|.*?市)?(?<dist>[^县]+县|.+?区|.+市|.+旗|.+海域|.+岛)?(?<town>[^区]+镇|.+街道|.+乡|.+县)?(?<village>[^村]+路|.+街|.+巷|.+道|.+段|.+队|.+弄|.+胡同|.+村|.+委会|.+开发区)?(?<number>[^区号]+号)?(?<road>.*)";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(this.infor);
+		@SuppressWarnings("rawtypes")
 		Map mesM = new HashMap<>();
 		mesM.put("province", null);
 		mesM.put("city", null);
@@ -94,7 +96,7 @@ public class User {
 	}
 
 	public String toString() {
-		return "Address [name=" + name + ", phone=" + phone + ", address=" + al + "]";
+		return "[姓名=" + name + ", 手机=" + phone + ", 地址=" + al + "]";
 	}
 	
 	private void add(Map<String,String> m) {
@@ -111,14 +113,8 @@ public class User {
 			String tr = this.al.get(1).substring(0,2);
 			this.al.set(0, tr);
 		}else if(this.al.get(0).equals("") && this.al.get(1).equals("")){
+			@SuppressWarnings("unused")
 			String tr = this.al.get(2);
-			if(tr.length() > 4) {
-				String province = tr.substring(0,2);
-				String city = tr.substring(2,4) ;
-				this.al.set(0, province + "省");
-				this.al.set(1, city + "市");
-				this.al.set(2, tr.substring(4,tr.length()));
-			}
 			
 		}
 		
