@@ -83,7 +83,6 @@ public class User {
 					this.infor = this.infor.delete(start, end);
 				}
 			}
-
 		}
 	}
 
@@ -101,6 +100,7 @@ public class User {
 		Map mesM = new HashMap<>();
 		
 		//赋初值
+		
 		mesM.put("province", null);
 		mesM.put("city", null);
 		mesM.put("dist", null);
@@ -126,7 +126,6 @@ public class User {
 	}
 
 	public void setInfor(StringBuffer mes) {
-
 		this.infor = mes;
 	}
 
@@ -155,7 +154,7 @@ public class User {
 		//如果有某一级地址缺失，保留空字符串
 		for (int i = 0; i < al.size(); i++) {
 			if (this.al.get(i).equals("")) {
-				this.al.set(i, "\"" + " " + "\"");
+				this.al.set(i, "\"" + "\"");
 			}
 
 			/*

@@ -14,9 +14,9 @@ private static final String separator = System.getProperty("line.separator");
 
 	
 //保存文件
-public static void saveFile(List<User> list) throws IOException {
+public static void saveFile(List<User> list,String args1) throws IOException {
 		
-	File f = new File(path);
+	File f = new File(args1);
 	FileWriter fw = null ;
 	f.createNewFile();		
 	fw = new FileWriter(f);
@@ -27,7 +27,7 @@ public static void saveFile(List<User> list) throws IOException {
 		fw.write("\"" + "手机" + "\"" + ":");
 		fw.write("\"" + a.getPhone() + "\"" + ",");
 		fw.write("\"" + "地址" + "\"" + ":");
-		fw.write("\"" + a.getAl().toString() + "\"");
+		fw.write(a.getAl().toString());
 		fw.write("}");
 		fw.write(separator);
 	}

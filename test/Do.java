@@ -6,17 +6,17 @@ import java.util.List;
 
 public class Do {
 	
-	public Do() throws IOException {
+	public Do(String args0,String args1) throws IOException {
 		//∂¡»°
-		List<String> dataList = DoFile.readFile();
+		List<String> dataList = DoFile.readFile(args0);
 		
 		List<User> addList = new ArrayList<>();
 		for(String data : dataList) {
 			addList.add(new User(data));
 		}
 		
-		for(User add : addList) { System.out.println(add); }
+		//for(User add : addList) { System.out.println(add); }
 		//±£¥Ê
-		DoFile.saveFile(addList); 
+		DoFile.saveFile(addList,args1); 
 	}
 }
