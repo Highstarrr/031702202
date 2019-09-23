@@ -7,7 +7,7 @@ import java.util.List;
 public class Do {
 	
 	public Do(String args0,String args1) throws IOException {
-		//∂¡»°
+		//ËØªÂèñ
 		List<String> dataList = DoFile.readFile(args0);
 		
 		List<User> addList = new ArrayList<>();
@@ -16,7 +16,7 @@ public class Do {
 		}
 		
 		//for(User add : addList) { System.out.println(add); }
-		//±£¥Ê
+		//‰øùÂ≠ò
 		DoFile.saveFile(addList,args1); 
 	}
 }

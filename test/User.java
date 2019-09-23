@@ -8,17 +8,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class User {
-	int level=0;//ÄÑ¶ÈµÈ¼¶£¬³õÊ¼»¯
-	String name = null;//ĞÕÃû£¬³õÊ¼»¯
-	String phone = null;//ÊÖ»úºÅ£¬³õÊ¼»¯
-	List<String> al = new ArrayList<>();//µØÖ·ĞÅÏ¢
+	int level=0;//éš¾åº¦ç­‰çº§ï¼Œåˆå§‹åŒ–
+	String name = null;//å§“åï¼Œåˆå§‹åŒ–
+	String phone = null;//æ‰‹æœºå·ï¼Œåˆå§‹åŒ–
+	List<String> al = new ArrayList<>();//åœ°å€ä¿¡æ¯
 	StringBuffer infor;
 
 	public User(String mes) {
 		setInfor(new StringBuffer(mes));
-		setName();//ÉèÖÃĞÕÃû
-		setPhone();//ÉèÖÃÊÖ»úºÅ
-		setAl();//ÉèÖÃµØÖ·
+		setName();//è®¾ç½®å§“å
+		setPhone();//è®¾ç½®æ‰‹æœºå·
+		setAl();//è®¾ç½®åœ°å€
 	}
 	
 	public int getLevel() {
@@ -34,23 +34,23 @@ public class User {
 	}
 
 	private void setName() {
-		String name=this.infor.toString();//×Ö·û´®
+		String name=this.infor.toString();//å­—ç¬¦ä¸²
 		/*
 		 * for(int i=0;i<name.length();i++) { if(i == 0)
 		 */
-		//ÅĞ¶ÏÊÇ·ñÓĞµÈ¼¶»®·Ö
+		//åˆ¤æ–­æ˜¯å¦æœ‰ç­‰çº§åˆ’åˆ†
 		boolean status=name.contains("!");
 		if(status)
-			//ÈôÓĞµÈ¼¶»®·Ö£¬½«x!ÌŞ³ı
+			//è‹¥æœ‰ç­‰çº§åˆ’åˆ†ï¼Œå°†x!å‰”é™¤
 				this.infor = this.infor.delete(0, 2);
 			/*
 			 * if(i == 1) this.infor = this.infor.deleteCharAt(i);
 			 
 		}*/
 		name = this.infor.toString().split(",")[0];
-		//ÕÒ³öĞÕÃûµÄÆğÊ¼Î»ÖÃ
+		//æ‰¾å‡ºå§“åçš„èµ·å§‹ä½ç½®
 		int start = infor.indexOf(",") + 1;
-		this.infor = new StringBuffer(this.infor.substring(start, this.infor.length()));//»ñÈ¡ĞÕÃû
+		this.infor = new StringBuffer(this.infor.substring(start, this.infor.length()));//è·å–å§“å
 		this.name = name;
 	}
 
@@ -63,23 +63,23 @@ public class User {
 		String nInfor = this.infor.toString();
 		for (int i = 0; i < nInfor.length(); i++) {
 			if (i == nInfor.length() - 1)
-				//½«ĞÅÏ¢µÄ×îºóÒ»¸ö¡°.¡±È¥µô
+				//å°†ä¿¡æ¯çš„æœ€åä¸€ä¸ªâ€œ.â€å»æ‰
 				this.infor = this.infor.deleteCharAt(i);
 		}
 		String nPhone;
-		//ÊÖ»úºÅÎ»ÖÃÆğÊ¼ÓÚ0£¬Ç°ÃæÒÑ¾­½«ĞÕÃûÌŞ³ı
+		//æ‰‹æœºå·ä½ç½®èµ·å§‹äº0ï¼Œå‰é¢å·²ç»å°†å§“åå‰”é™¤
 		for (int start = 0; start < nInfor.length(); start++) {
 			if (Character.isDigit(nInfor.charAt(start))) {
-				//ÊÖ»úºÅ³¤¶ÈÎª11Î»
+				//æ‰‹æœºå·é•¿åº¦ä¸º11ä½
 				int end = start + 11;
 				if (end > nInfor.length()) {
 					end = nInfor.length();
 				}
-				//»ñÈ¡ÊÖ»úºÅĞÅÏ¢
+				//è·å–æ‰‹æœºå·ä¿¡æ¯
 				nPhone = nInfor.substring(start, end);
 				if (nPhone.matches("[0-9]{1,}")) {
 					this.phone = nPhone;
-					// ½«µç»°ºÅÂë´ÓµØÖ·ÖĞÉ¾³ı
+					// å°†ç”µè¯å·ç ä»åœ°å€ä¸­åˆ é™¤
 					this.infor = this.infor.delete(start, end);
 				}
 			}
@@ -92,14 +92,14 @@ public class User {
 
 	@SuppressWarnings("unchecked")
 	public void setAl() {
-		String regex = "(?<province>[^Ê¡]+×ÔÖÎÇø|.*?Ê¡|.*?ĞĞÕşÇø)?(?<city>[^ÊĞ]+×ÔÖÎÖİ|.*?µØÇø|.*?ĞĞÕşµ¥Î»|.+ÃË|ÊĞÏ½Çø|.*?ÊĞ)?(?<dist>[^ÏØ]+ÏØ|.+?Çø|.+ÊĞ|.+Æì|.+º£Óò|.+µº)?(?<town>[^Çø]+Õò|.+½ÖµÀ|.+Ïç|.+ÏØ)?(?<village>[^´å]+Â·|.+½Ö|.+Ïï|.+µÀ|.+¶Î|.+¶Ó|.+Åª|.+ºúÍ¬|.+´å|.+Î¯»á|.+¿ª·¢Çø)?(?<number>[^ÇøºÅ]+ºÅ)?(?<road>.*)";//ÕıÔò±í´ïÊ½£¬²»Ì«·ûºÏÌâÒâ£¬´ı¸Ä
+		String regex = "(?<province>[^çœ]+è‡ªæ²»åŒº|.*?çœ|.*?è¡Œæ”¿åŒº)?(?<city>[^å¸‚]+è‡ªæ²»å·|.*?åœ°åŒº|.*?è¡Œæ”¿å•ä½|.+ç›Ÿ|å¸‚è¾–åŒº|.*?å¸‚)?(?<dist>[^å¿]+å¿|.+?åŒº|.+å¸‚|.+æ——|.+æµ·åŸŸ|.+å²›)?(?<town>[^åŒº]+é•‡|.+è¡—é“|.+ä¹¡|.+å¿)?(?<village>[^æ‘]+è·¯|.+è¡—|.+å··|.+é“|.+æ®µ|.+é˜Ÿ|.+å¼„|.+èƒ¡åŒ|.+æ‘|.+å§”ä¼š|.+å¼€å‘åŒº)?(?<number>[^åŒºå·]+å·)?(?<road>.*)";//æ­£åˆ™è¡¨è¾¾å¼ï¼Œä¸å¤ªç¬¦åˆé¢˜æ„ï¼Œå¾…æ”¹
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(this.infor);
 		@SuppressWarnings("rawtypes")
-		//´´½¨
+		//åˆ›å»º
 		Map mesM = new HashMap<>();
 		
-		//¸³³õÖµ
+		//èµ‹åˆå€¼
 		
 		mesM.put("province", null);
 		mesM.put("city", null);
@@ -130,10 +130,10 @@ public class User {
 	}
 
 	public String toString() {
-		return "{\"ĞÕÃû\":" + name + ",\"ÊÖ»ú\":" + phone + ",\"µØÖ·\":" + al + "}";
+		return "{\"å§“å\":" + name + ",\"æ‰‹æœº\":" + phone + ",\"åœ°å€\":" + al + "}";
 	}
 	
-	//½«·Ö¸î³öÀ´µÄÊ¡ÊĞÇøĞÅÏ¢·ÅÈë
+	//å°†åˆ†å‰²å‡ºæ¥çš„çœå¸‚åŒºä¿¡æ¯æ”¾å…¥
 	private void add(Map<String, String> m) {
 		al.add(m.get("province") == null ? "" : m.get("province"));
 		al.add(m.get("city") == null ? "" : m.get("city"));
@@ -143,15 +143,15 @@ public class User {
 		al.add(m.get("number") == null ? "" : m.get("number"));
 		al.add(m.get("road") == null ? "" : m.get("road"));
 
-		// µ¥¶À¿¼ÂÇÖ±Ï½ÊĞ
+		// å•ç‹¬è€ƒè™‘ç›´è¾–å¸‚
 		if (this.al.get(0).equals("") && !this.al.get(1).equals("")) {
-			String tr = this.al.get(1).substring(0, 2);//·µ»Ø
+			String tr = this.al.get(1).substring(0, 2);//è¿”å›
 			this.al.set(0, tr);
 		} else if (this.al.get(0).equals("") && this.al.get(1).equals("")) {
 			@SuppressWarnings("unused")
 			String tr = this.al.get(2);
 		}
-		//Èç¹ûÓĞÄ³Ò»¼¶µØÖ·È±Ê§£¬±£Áô¿Õ×Ö·û´®
+		//å¦‚æœæœ‰æŸä¸€çº§åœ°å€ç¼ºå¤±ï¼Œä¿ç•™ç©ºå­—ç¬¦ä¸²
 		for (int i = 0; i < al.size(); i++) {
 			if (this.al.get(i).equals("")) {
 				this.al.set(i, "\"" + "\"");
