@@ -1,7 +1,6 @@
-package test;
 
 import java.io.IOException;
-import java.test.*;
+import test.*;
 public class Main {
 	
 	public static void main(String[] args) throws IOException {
